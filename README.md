@@ -76,32 +76,37 @@ sms/
 ├── manage.py
 
 ```
-🔧 Setup Instructions
-Clone the repository
 
+##🔧 Setup Instructions
+
+Clone the repository
 ```bash
-Copy
 git clone https://github.com/yourusername/school-management-system.git
 cd school-management-system
-Create and activate a virtual environment
 ```
+
+Create and activate a virtual environment
 ```bash
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
-Install dependencies
 ```
+
+Install dependencies
 ```bash
 pip install -r requirements.txt
-Apply migrations
 ```
+
+Apply migrations
 ```bash
 python manage.py migrate
-Create a superuser
 ```
+
+Create a superuser
 ```bash
 python manage.py createsuperuser
-Run the development server
 ```
+
+Run the development server
 ```bash
 python manage.py runserver
 ```
