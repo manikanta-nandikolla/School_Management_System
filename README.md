@@ -86,27 +86,22 @@ cd school-management-system
 Create and activate a virtual environment
 ```
 ```bash
-Copy
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 Install dependencies
 ```
 ```bash
-Copy
 pip install -r requirements.txt
 Apply migrations
 ```
 ```bash
-Copy
 python manage.py migrate
 Create a superuser
 ```
 ```bash
-Copy
 python manage.py createsuperuser
 Run the development server
 ```
 ```bash
-Copy
 python manage.py runserver
 ```
