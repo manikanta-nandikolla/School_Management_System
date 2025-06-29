@@ -1,3 +1,6 @@
+envVars:
+  - key: PYTHONPATH
+    value: /opt/render/project/src
 services:
   - type: web
     name: school-management-system
