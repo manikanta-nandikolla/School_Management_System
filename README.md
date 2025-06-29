@@ -77,7 +77,7 @@ sms/
 
 ```
 
-##🔧 Setup Instructions
+🔧 Setup Instructions
 
 Clone the repository
 ```bash
