@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Student Registration{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accounts/student_register.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="register-page-wrapper">
+  <div class="register-container">
+      <h2>Student Registration</h2>
+
+      <div class="messages">
+          {% for message in messages %}
+              <div class="{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+      </div>
+
+      <form method="POST" novalidate>
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          {% for field in form %}
+              <div class="form-group">
+                  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                  {{ field }}
+                  {% if field.errors %}
+                      <div class="error">{{ field.errors|striptags }}</div>
+                  {% endif %}
+              </div>
+          {% endfor %}
+          <button type="submit">Register</button>
+          <p>Already have login<a href="{% url 'student_login' %}">Login</a></p>
+      </form>
+  </div>
+</div>
+{% endblock content %}

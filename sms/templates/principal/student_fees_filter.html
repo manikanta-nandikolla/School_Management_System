@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Fee Filter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f0f0, #d6e4ff);
+            padding: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transform: perspective(1000px);
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 120, 255, 0.5);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background: linear-gradient(to right, #28a745, #218838);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05) translateZ(10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background: linear-gradient(to right, #6c757d, #495057);
+            color: white;
+            font-weight: bold;
+        }
+
+        tbody tr {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        tbody tr:hover {
+            transform: perspective(800px) rotateX(3deg);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            background-color: #f9f9f9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            form {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            input[type="number"], .btn {
+                width: 100%;
+                margin-top: 5px;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tbody tr {
+                margin-bottom: 15px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 6px;
+                padding: 10px;
+                background: #ffffff;
+            }
+
+            tbody td {
+                padding: 8px;
+                border: none;
+                position: relative;
+            }
+
+            tbody td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                display: block;
+                margin-bottom: 4px;
+                color: #555;
+            }
+        }
+    </style>
+</head>
+<body>    
+    <div class="container">
+        <h2>Student Fee Records - Filter</h2>
+        <form method="get">
+            <label for="month">Month:</label>
+            <input type="number" id="month" name="month" value="{{ month_selected }}" min="1" max="12">
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" value="{{ year_selected }}" min="2020">
+            <button type="submit" class="btn">Filter</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Roll</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fee in fees %}
+                <tr>
+                    <td data-label="Student">{{ fee.student.get_full_name }}</td>
+                    <td data-label="Roll">{{ fee.student.roll_number }}</td>
+                    <td data-label="Amount">₹{{ fee.amount }}</td>
+                    <td data-label="Date">{{ fee.date|date:"Y-m-d" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">No results found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

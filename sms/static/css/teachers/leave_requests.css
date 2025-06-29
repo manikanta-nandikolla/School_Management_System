@@ -1,0 +1,127 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+}
+.alert {
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.alert-success { background-color: #d4edda; color: #155724; }
+.alert-error, .alert-danger { background-color: #f8d7da; color: #721c24; }
+.alert-warning { background-color: #fff3cd; color: #856404; }
+.alert-info { background-color: #d1ecf1; color: #0c5460; }
+
+h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.table {
+    width: 90%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px auto;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.table th {
+    background-color: #8c8989;
+    color: #000000;
+    font-weight: 600;
+}
+
+.table tr:hover {
+    background-color: #f9fbfc;
+}
+
+form {
+    display: inline;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+button[name="action"][value="reject"] {
+    background-color: #e74c3c;
+}
+button:hover {
+    background-color: #2980b9;
+}
+
+button[name="action"][value="reject"]:hover {
+    background-color: #c0392b;
+}
+
+.no-requests {
+    text-align: center;
+    color: #7f8c8d;
+    margin-top: 50px;
+}
+
+a {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #2980b9;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+    .table th, .table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+    button {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    .table-container {
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.3rem;
+    }
+    .table {
+        min-width: 100%;
+    }
+    button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    form {
+        display: block;
+    }
+}

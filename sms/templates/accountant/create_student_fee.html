@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Student Fee Create{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accountant/create_student_fee.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container"> 
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <h2>Create Student Fee</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Fee</button>
+        <a href="{% url 'student_fee_list' %}">Back to Fee List</a>
+    </form>
+</div>
+{% endblock %}

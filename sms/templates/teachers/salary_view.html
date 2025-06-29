@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Pay Slips{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teachers/salary_view.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container">
+    <h2>Your Salary / Pay Slips</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Year</th>
+                <th>Amount</th>
+                <th>Paid Date</th>
+                <th>Note</th>
+                <th>Payslip</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for salary in salaries %}
+            <tr>
+                <td>{{ salary.month }}</td>
+                <td>{{ salary.year }}</td>
+                <td>₹{{ salary.amount }}</td>
+                <td>{{ salary.paid_date }}</td>
+                <td>{{ salary.note|default:"—" }}</td>
+                <td>
+                    {% if salary.payslip %}
+                        <a href="{{ salary.payslip.url }}" target="_blank" class="btn btn-sm btn-primary">View</a>
+                        <a href="{% url 'download_payslip' salary.id %}" class="btn btn-sm btn-outline-secondary" target="_blank">⬇ Download</a>
+                    {% else %}
+                        <span class="text-muted">Not available</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6">No salary records found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'teacher_dashboard' %}" class="btn btn-secondary" style="margin-top: 20px;">← Back to Dashboard</a>
+</div>
+{% endblock %}

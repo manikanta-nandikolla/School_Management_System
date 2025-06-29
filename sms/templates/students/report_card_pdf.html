@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Academic Report Card</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 30mm 20mm 30mm 20mm;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fdfdfd;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .report-container {
+            background: #ffffff;
+            border: 2px solid #0c4a6e;
+            padding: 30px;
+            max-width: 850px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            height: 70px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            color: #0c4a6e;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            margin: 2px 0;
+            font-size: 14px;
+        }
+
+        .info-table, .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .info-table td {
+            padding: 6px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ccc;
+            color: #0c4a6e;
+        }
+
+        .marks-table th, .marks-table td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .marks-table th {
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+        }
+
+        .exam-title {
+            margin-top: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #0369a1;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 50px;
+            color: #555;
+        }
+
+        .signature-line {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .signature-block {
+            width: 45%;
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 5px;
+            font-size: 13px;
+        }
+
+        .highlight {
+            background-color: #f0fdf4;
+            padding: 5px 10px;
+            border-left: 5px solid #16a34a;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+
+        <div class="header">
+            <img src="{{ school_logo_url }}" alt="School Logo" class="logo">
+            <h1>Academic Report Card</h1>
+            <p><strong>Date Issued:</strong> {{ current_date }}</p>
+        </div>
+
+        <table class="info-table">
+            <tr>
+                <td><strong>Student Name:</strong> {{ student.get_full_name }}</td>
+                <td><strong>Roll No:</strong> {{ student.roll_number }}</td>
+            </tr>
+            <tr>
+                <td><strong>Class/Section:</strong> {{ student.class_section.name }}</td>
+                <td><strong>Email:</strong> {{ student.email }}</td>
+            </tr>
+        </table>
+
+        <div class="section-title">Attendance Summary</div>
+        <table class="info-table">
+            <tr>
+                <td><strong>Total Days:</strong> {{ total_days }}</td>
+                <td><strong>Present:</strong> {{ present_days }}</td>
+                <td><strong>Absent:</strong> {{ absent_days }}</td>
+                <td><strong>Attendance %:</strong> {{ attendance_percent }}%</td>
+            </tr>
+        </table>
+
+        <div class="section-title">Exam Results</div>
+
+        {% for exam, exam_marks in grouped_marks.items %}
+            <div class="exam-title">{{ exam }}</div>
+            <table class="marks-table">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks Obtained</th>
+                        <th>Class Average</th>
+                        <th>Grade</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mark in exam_marks %}
+                        <tr>
+                            <td>{{ mark.subject.name }}</td>
+                            <td>{{ mark.marks_obtained }}</td>
+                            <td>{{ mark.subject_avg }}</td>
+                            <td>{{ mark.grade }}</td>
+                            <td>{{ mark.remark }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+
+        <div class="highlight">Overall GPA: {{ gpa }}</div>
+
+        <div class="signature-line">
+            <div class="signature-block">Class Teacher's Signature</div>
+            <div class="signature-block">Principal's Signature</div>
+        </div>
+
+        <div class="footer">
+            <p>This is a computer-generated report card. No physical signature required.</p>
+        </div>
+    </div>
+</body>
+</html>

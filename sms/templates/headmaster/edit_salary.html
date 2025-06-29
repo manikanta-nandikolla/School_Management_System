@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Edit Salary{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/edit_salary.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>Edit Teacher Salary</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+
+        <a href="{% url 'manage_teacher_salary' %}">⬅ Back</a>
+    </form>
+</div>
+{% endblock %}

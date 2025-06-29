@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Edit Class Teacher{% endblock title %}
+<link rel="stylesheet" href="{% static 'css/headmaster/edit_class_teacher.css' %}">
+{% block content %}
+<div class="container">
+    <h2>Edit Class Teacher Assignment</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Manage Holidays{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/principal/holiday_list.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>📅 Holiday List</h2>
+    <a href="{% url 'holiday_create' %}" class="btn btn-success mb-3">➕ Add Holiday</a>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Holiday</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for holiday in holidays %}
+            <tr>
+                <td>{{ holiday.name }}</td>
+                <td>{{ holiday.date }}</td>
+                <td>
+                    <a href="{% url 'holiday_edit' holiday.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{% url 'holiday_delete' holiday.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this holiday?')">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">No holidays added yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Salary Payment{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/razorpay_payment.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <div class="payment-box">
+        <h2>Pay Salary for {{ teacher_name }}</h2>
+        <p><strong>Amount:</strong> ₹{{ amount_rupees|floatformat:2 }}</p>
+        <p><strong>Order ID:</strong> {{ order_id }}</p>
+        <button id="rzp-button1" class="pay-button">Pay Now</button>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    const options = {
+        "key": "{{ razorpay_key }}",
+        "amount": "{{ amount_paise }}", 
+        "currency": "INR",
+        "name": "School Management System",
+        "description": "Teacher Salary Payment",
+        "order_id": "{{ order_id }}",
+        "handler": function (response) {
+            fetch("{% url 'payment_success' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_signature: response.razorpay_signature,
+                })
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = "{% url 'teacher_salary_list' %}";
+                } else {
+                    alert("Payment succeeded, but there was an error saving the record.");
+                }
+            }).catch(() => {
+                alert("An error occurred while completing the payment.");
+            });
+        },
+        "prefill": {
+            "name": "{{ teacher_name }}",
+            "email": "",
+            "contact": ""
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+
+    const rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+    };
+</script>
+{% endblock content %}

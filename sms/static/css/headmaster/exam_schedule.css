@@ -1,0 +1,159 @@
+/* Container Styling */
+.container {
+  width: 750px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #222;
+}
+.temp-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.temp-list li {
+  background-color: #f8f8f8;
+  border-left: 4px solid #ff4d00;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  font-size: 0.95rem;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+form p {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="time"],
+form select {
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+form input:focus,
+form select:focus {
+  border-color: #ff4d00;
+  outline: none;
+}
+
+/* Submit Button */
+form .btn1 {
+  background-color: #ff0022;
+  color: white;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+form .btn1:hover {
+  background-color: #e60004;
+}
+form .btn2 {
+  background-color: #a200ff;
+  color: white;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+form .btn2:hover {
+  background-color: #7700e6;
+}
+.btn {
+  background-color: #ff4d00;
+  color: white;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin: 20px auto;
+}
+
+.btn:hover {
+  background-color: #e64000;
+}
+.btn a{
+    text-decoration: none;
+    color: #ffffff;
+}
+/* Secondary Button with Link */
+form button a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  width: 100%;
+}
+
+form button {
+  background-color: #666;
+  color: white;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #444;
+}
+
+form button a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.2rem;
+  }
+
+  form .btn,
+  form button {
+    width: 100%;
+  }
+}

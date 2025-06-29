@@ -1,0 +1,67 @@
+/* Container styling */
+.pending-fee-container {
+    margin-top: 80px;
+    padding: 20px;
+}
+
+/* Heading center */
+.text-center {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Table styles */
+.pending-fee-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.pending-fee-table th,
+.pending-fee-table td {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.pending-fee-table thead {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+/* No records message */
+.no-records {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    .pending-fee-table thead {
+        display: none;
+    }
+
+    .pending-fee-table tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+
+    .pending-fee-table td {
+        display: block;
+        text-align: right;
+        padding: 10px;
+        position: relative;
+    }
+
+    .pending-fee-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #555;
+    }
+}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add / Edit Event{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" >href="{% static 'css/princip[sl/event_form.css' %}"
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>{% if form.instance.pk %}✏️ Edit Event{% else %}➕ Add Event{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'event_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

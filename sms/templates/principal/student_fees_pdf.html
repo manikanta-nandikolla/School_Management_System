@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Fee Report</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+            @top-center {
+                content: element(header);
+            }
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 11px;
+                color: #666;
+            }
+        }
+
+        body {
+            font-family: 'DejaVu Sans', Arial, sans-serif;
+            font-size: 12px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            width: 70px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        thead {
+            background-color: #f8f8f8;
+        }
+
+        th, td {
+            border: 1px solid #bbb;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e9ecef;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td[colspan] {
+            text-align: center;
+            font-style: italic;
+            color: #999;
+        }
+
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div style="text-align: center;">
+            <img src="{{ STATIC_ROOT }}/images/logo.jpeg" alt="School Logo">
+            <h2>Student Fee Report</h2>
+        </div>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Roll Number</th>
+                <th>Amount Paid</th>
+                <th>Date Paid</th>
+                <th>Receipt No</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fee in fees %}
+            <tr>
+                <td>{{ fee.student.get_full_name }}</td>
+                <td>{{ fee.student.roll_number }}</td>
+                <td>₹{{ fee.amount }}</td>
+                <td>{{ fee.date|date:"Y-m-d" }}</td>
+                <td>{{ fee.receipt_number }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No fee records available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

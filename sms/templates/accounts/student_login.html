@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Student Login{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accounts/student_login.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="login-page-wrapper">
+  <div class="login-container">
+      <h2>Student Login</h2>
+
+      <div class="messages">
+          {% for message in messages %}
+              <div class="{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+      </div>
+
+      <form method="post">
+            {% csrf_token %}
+              
+            <label for="username">Roll number:</label>
+            <input type="text" name="username" required>
+      
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+      
+            <button type="submit">Login</button>
+            <a href="{% url 'password_reset' 'student' %}">Forgot Password?</a>
+            <p>Don't have any login credentials?<a href="{% url 'student_register' %}">Register</a></p>
+      </form>
+  </div>
+</div>
+{% endblock content %}

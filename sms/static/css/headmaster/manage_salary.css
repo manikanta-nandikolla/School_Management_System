@@ -1,0 +1,145 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9fafb;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 40px;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+form label {
+    font-weight: 600;
+    color: #495057;
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #fafafa;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead {
+    background-color: #007bff;
+    color: white;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:last-child {
+    color: #dc3545; /* Red for delete */
+}
+
+a:last-child:hover {
+    color: #a71d2a;
+}
+
+.container > a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #6c757d;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.container > a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    thead tr {
+        display: none;
+    }
+    tbody tr {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #fff;
+    }
+    tbody td {
+        padding-left: 50%;
+        position: relative;
+        text-align: right;
+    }
+    tbody td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-left: 10px;
+        font-weight: 600;
+        text-align: left;
+    }
+}

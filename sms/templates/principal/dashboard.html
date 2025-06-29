@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Principal Dashboard{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/principal/dashboard.css' %}">
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
+{% endblock extra_css %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Welcome, {{ request.user.get_full_name }}</h1>
+</div>
+<div class="dashboard-container">
+    <h2 class="dashboard-title">Principal Dashboard</h2>
+
+    <div class="dashboard-cards">
+        <div class="dashboard-card1"><span>Students</span><strong>{{ students.count }}</strong></div>
+        <div class="dashboard-card2"><span>Teachers</span><strong>{{ teachers.count }}</strong></div>
+        <div class="dashboard-card3"><span>Headmasters</span><strong>{{ headmasters.count }}</strong></div>
+        <div class="dashboard-card4"><span>Accountants</span><strong>{{ accountants.count }}</strong></div>
+    </div>
+
+    <h3 class="section-title" style="text-align: center;">Pending Approvals</h3>
+    <div class="custom-table-wrapper">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Class</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in pending_approvals %}
+                <tr>
+                    <td>{{ user.get_full_name }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{user.class_section}}</td>
+                    <td>
+                        <a href="{% url 'approve_user' user.id %}" class="btn approve">Approve</a>
+                        <a href="{% url 'reject_user' user.id %}" class="btn reject">Reject</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="3">No pending approvals.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="stats-list">
+        <h4>User Approvals</h4>
+        <ul>
+            <li>Approved: {{ approved_users.count }}</li>
+            <li>Pending: {{ pending_approvals.count }}</li>
+            <li>Rejected: {{ rejected_users.count }}</li>
+        </ul>
+
+        <h4>Finance Overview</h4>
+        <ul>
+            <li>Total Fees: ₹{{ total_fees }}</li>
+            <li>Total Salaries: ₹{{ total_salaries }}</li>
+        </ul>
+    </div>
+    <div class="action-buttons">
+        <a href="{% url 'admin:index' %}" class="btn yellow" target="_blank">Go to Admin Panel</a>
+        <a href="{% url 'export_users_csv' %}" class="btn outline-blue" target="_blank">📁 Export Users (CSV)</a>
+        <a href="{% url 'export_users_pdf' %}" class="btn red" target="_blank">📄 Export Users (PDF)</a>
+        <a href="{% url 'export_student_fees_pdf' %}" class="btn outline-green" target="_blank">🧾 Export Student Fees (PDF)</a>
+        <a href="{% url 'export_teacher_salaries_pdf' %}" class="btn outline-blue" target="_blank">💵 Export Teacher Salaries (PDF)</a>
+    </div>
+</div>
+
+<div class="dashboard-charts">
+    <h4 style="text-align: center;">User Overview ({{ now|date:"Y" }})</h4>
+    <div class="small-chart-container">
+        <canvas id="userChart"></canvas>
+    </div>
+
+    <h4 style="text-align: center">Finance Overview ({{ now|date:"Y" }})</h4>
+    <div class="chart-row">
+        <div class="chart-container">
+            <h6>Fee Collection</h6>
+            <div class="small-chart-container">
+                <canvas id="feesChart" height="250"></canvas>
+            </div>
+            <div class="chart-buttons">
+                <button class="btn blue" onclick="toggleChartType('fees')">Toggle Type</button>
+                <button class="btn green" onclick="downloadChart('feesChart')">Download PNG</button>
+            </div>
+        </div>
+        <div class="chart-container">
+            <h6>Salary Payments</h6>
+            <div class="small-chart-container">
+                <canvas id="salaryChart" height="250"></canvas>
+            </div>
+            <div class="chart-buttons">
+                <button class="btn blue" onclick="toggleChartType('salary')">Toggle Type</button>
+                <button class="btn green" onclick="downloadChart('salaryChart')">Download PNG</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="dashboard-grid">
+    <div class="dashboard-section">
+        <h3>📢 Notices
+            <a href="{% url 'notice_create' %}" class="btn btn-sm btn-success" style="float:right;">➕ Add Notice</a>
+        </h3>
+        <ul>
+            {% for notice in notices %}
+            <li>
+                <strong>{{ notice.title }}</strong> - {{ notice.date }}
+                <div style="float:right;">
+                    <a href="{% url 'notice_edit' notice.id %}" class="btn btn-sm btn-outline-primary">✏️ Edit</a>
+                    <a href="{% url 'notice_delete' notice.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this notice?')">🗑️ Delete</a>
+                </div>
+            </li>
+            {% empty %}
+            <li>No notices available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="dashboard-section">
+        <h3>🎉 Events
+            <a href="{% url 'event_create' %}" class="btn btn-sm btn-success" style="float:right;">➕ Add Event</a>
+        </h3>
+        <ul>
+            {% for event in events %}
+            <li>
+                <strong>{{ event.title }}</strong> - {{ event.event_date }}
+                <div style="float:right;">
+                    <a href="{% url 'event_edit' event.id %}" class="btn btn-sm btn-outline-primary">✏️ Edit</a>
+                    <a href="{% url 'event_delete' event.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this event?')">🗑️ Delete</a>
+                </div>
+            </li>
+            {% empty %}
+            <li>No events scheduled.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="dashboard-section">
+        <h3>🏖️ Holidays
+            <a href="{% url 'holiday_create' %}" class="btn btn-sm btn-success" style="float:right;">➕ Add Holiday</a>
+        </h3>
+        <ul>
+            {% for holiday in holidays %}
+            <li>
+                <strong>{{ holiday.name }}</strong> - {{ holiday.date }}
+                <div style="float:right;">
+                    <a href="{% url 'holiday_edit' holiday.id %}" class="btn btn-sm btn-outline-primary">✏️ Edit</a>
+                    <a href="{% url 'holiday_delete' holiday.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this holiday?')">🗑️ Delete</a>
+                </div>
+            </li>
+            {% empty %}
+            <li>No upcoming holidays.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<br>
+<div class="filter-buttons">
+    <a href="{% url 'filtered_student_fees' %}" class="btn info" target="_blank">🔎 Filter Student Fees</a>
+    <a href="{% url 'filtered_teacher_salaries' %}" class="btn warning" target="_blank">🔎 Filter Teacher Salaries</a>
+</div>
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('userChart').getContext('2d');
+    const userChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Students', 'Teachers', 'Headmasters', 'Accountants'],
+            datasets: [{
+                label: 'User Roles',
+                data: [{{ students.count }}, {{ teachers.count }}, {{ headmasters.count }}, {{ accountants.count }}],
+                backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+    const feeData = {
+        labels: {{ fee_labels|safe }},
+        datasets: [{
+            label: 'Fee Collection',
+            data: {{ fee_totals|safe }},
+            backgroundColor: generateColors({{ fee_labels|length }})
+        }]
+    };
+    
+    const salaryData = {
+        labels: {{ salary_labels|safe }},
+        datasets: [{
+            label: 'Salary Payments',
+            data: {{ salary_totals|safe }},
+            backgroundColor: generateColors({{ salary_labels|length }})
+        }]
+    };
+    
+    let feesChartType = 'pie';
+    let salaryChartType = 'pie';
+    let feesChart, salaryChart;
+    
+    function renderChart(chartId, chartType, data) {
+        const ctx = document.getElementById(chartId);
+        return new Chart(ctx, {
+            type: chartType,
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: data.datasets[0].label + ' - ' + chartType.toUpperCase()
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const val = context.parsed;
+                                const total = context.chart._metasets[0].total || context.chart._metasets[0].total;
+                                const percent = ((val / total) * 100).toFixed(1);
+                                return `${context.label}: ₹${val} (${percent}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    function toggleChartType(chart) {
+        if (chart === 'fees') {
+            feesChart.destroy();
+            feesChartType = feesChartType === 'pie' ? 'bar' : 'pie';
+            feesChart = renderChart('feesChart', feesChartType, feeData);
+        } else if (chart === 'salary') {
+            salaryChart.destroy();
+            salaryChartType = salaryChartType === 'pie' ? 'bar' : 'pie';
+            salaryChart = renderChart('salaryChart', salaryChartType, salaryData);
+        }
+    }
+    
+    function downloadChart(canvasId) {
+        const link = document.createElement('a');
+        link.download = canvasId + '.png';
+        link.href = document.getElementById(canvasId).toDataURL('image/png');
+        link.click();
+    }
+    
+    function generateColors(count) {
+        const colors = [
+            '#007bff','#28a745','#ffc107','#dc3545','#17a2b8',
+            '#6f42c1','#fd7e14','#20c997','#e83e8c','#6610f2',
+            '#6c757d','#343a40'
+        ];
+        return colors.slice(0, count);
+    }
+    
+    // Render initial charts
+    feesChart = renderChart('feesChart', feesChartType, feeData);
+    salaryChart = renderChart('salaryChart', salaryChartType, salaryData);
+</script>
+{% endblock extra_js %}
+{% endblock %}

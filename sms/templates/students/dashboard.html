@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Student Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/students/dashboard.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container">
+    <h2 class="dashboard-heading">Welcome, {{ request.user.get_full_name }}</h2>
+    <p><strong>Roll Number:</strong> {{ request.user.roll_number }}</p>
+    <p><strong>Class:</strong> {{ class_section }}</p>
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+
+    <hr class="divider">
+
+    <section class="section-box">
+        <h3>Attendance Summary</h3>
+        <p><strong>Attendance Percentage:</strong> {{ attendance_percent }}%</p>
+        <div class="attendance-bar-container">
+            <div class="attendance-bar-fill" style="width: {{ attendance_percent }}%;">
+                {{ attendance_percent }}%
+            </div>
+        </div>
+        <canvas id="attendanceChart" class="chart" width="200" height="200"></canvas>
+        <ul class="list">
+            {% for a in attendance %}
+                <li>{{ a.date }} - {{ a.status }}</li>
+            {% empty %}
+                <p class="no-data">No attendance records found.</p>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+<div class="container">
+    <section class="section-box">
+        <h3>Marks by Exam</h3>
+        {% for exam, exam_marks in grouped_marks.items %}
+            <div class="exam-section">
+                <h4>{{ exam }}</h4>
+                <p><strong>Total Marks Obtained:</strong> <span class="total-marks">Calculating...</span></p>
+                <p><strong>Average Marks:</strong> <span class="average-marks">Calculating...</span></p>
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                            <th>Percentage</th>
+                            <th>Grade</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mark in exam_marks %}
+                        <tr>
+                            <td data-label="Subject">{{ mark.get_subject_display_name }}</td>
+                            <td data-label="Marks" class="student-mark">{{ mark.marks_obtained }}</td>
+                            <td class="percentage-cell"></td>
+                            <td class="grade-cell"></td>
+                            <td class="status-cell"></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+        <div class="chart-controls">
+            <label for="chartType">Select Chart Type:</label>
+            <select id="chartType" class="chart-type-select">
+                <option value="bar" selected>Bar Chart</option>
+                <option value="doughnut">Doughnut Chart</option>
+                <option value="pie">Pie Chart</option>
+            </select>
+        </div>
+        <div class="chart-wrapper">
+            <canvas id="marksChart" class="chart" width="400" height="200"></canvas>
+        </div>
+    </section>
+
+    <section class="section-box">
+        <h3>📥 Download Report Card</h3>
+        <p>You can download your current report card as a PDF.</p>
+        <a href="{% url 'generate_report_card_pdf' %}" class="btn download-btn">Download Report Card</a>
+    </section>
+</div>
+<div class="container">
+    <section class="section-box">
+        <h3>Apply for Leave</h3>
+        <form method="post" class="leave-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Submit Leave Request</button>
+        </form>
+
+        <h3>Leave Requests</h3>
+        <ul class="list">
+            {% for leave in leave_requests %}
+                <li>{{ leave.date_requested }} - {{ leave.reason }} ({{ leave.status }})</li>
+            {% empty %}
+                <p class="no-data">No leave applications found.</p>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+<div class="container">
+    <section class="section-box">
+        <h3>🧪 Upcoming Exams</h3>
+        {% if upcoming_exams %}
+            <table class="styled-table">
+                <thead>
+                    <tr><th>Exam</th><th>Subject</th><th>Date</th><th>Time</th></tr>
+                </thead>
+                <tbody>
+                    {% for e in upcoming_exams %}
+                    <tr>
+                        <td>{{ e.exam }}</td>
+                        <td>{{ e.subject }}</td>
+                        <td>{{ e.exam_date }}</td>
+                        <td>{{ e.exam_time|time:"h:i A" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No upcoming exams.</p>
+        {% endif %}
+    </section>
+</div>
+<div class="container">
+    <section class="section-box payment-section">
+        <p>Want to pay the pending fee amount?</p>
+        <div class="payment-buttons">
+            <a href="{% url 'student_fee_payment' %}" class="btn">💳 Click here to pay</a>
+            <a href="{% url 'student_fee_history' %}" class="btn">📄 View Fee History</a>
+        </div>
+    </section>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+    // Attendance Chart
+    const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+    new Chart(attendanceCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Present', 'Absent'],
+            datasets: [{
+                data: [{{ present_days }}, {{ absent_days }}],
+                backgroundColor: ['#4caf50', '#f44336']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    // Marks Chart
+    let marksChartInstance = null;
+
+    function renderMarksChart(chartType = 'bar') {
+        const ctx = document.getElementById('marksChart').getContext('2d');
+
+        if (marksChartInstance) {
+            marksChartInstance.destroy();
+        }
+
+        marksChartInstance = new Chart(ctx, {
+            type: chartType,
+            data: {
+                labels: {{ chart_labels|safe }},
+                datasets: [{
+                    label: 'Your Marks',
+                    data: {{ chart_values|safe }},
+                    backgroundColor: chartType === 'bar' ? {{ chart_colors|safe }} : [
+                        '#4caf50', '#f44336', '#ff9800', '#2196f3', '#9c27b0',
+                        '#e91e63', '#00bcd4', '#cddc39', '#ffc107', '#607d8b'
+                    ],
+                    borderColor: chartType === 'bar' ? '#ffffff00' : '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: chartType !== 'bar'
+                    }
+                },
+                scales: chartType === 'bar' ? {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' marks';
+                            }
+                        }
+                    }
+                } : {}
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderMarksChart();
+
+        document.getElementById('chartType').addEventListener('change', (event) => {
+            renderMarksChart(event.target.value);
+        });
+    });
+
+    // Initialize default bar chart
+    document.addEventListener('DOMContentLoaded', () => {
+        renderMarksChart();
+
+        // Set up chart type switcher
+        document.getElementById('chartType').addEventListener('change', (event) => {
+            renderMarksChart(event.target.value);
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const examSections = document.querySelectorAll(".exam-section");
+
+        examSections.forEach(section => {
+            const marks = Array.from(section.querySelectorAll(".student-mark")).map(cell => parseFloat(cell.textContent));
+            const total = marks.reduce((sum, val) => sum + val, 0);
+            const avg = marks.length ? (total / marks.length).toFixed(2) : 0;
+
+            section.querySelector(".total-marks").textContent = total;
+            section.querySelector(".average-marks").textContent = avg;
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const examSections = document.querySelectorAll(".exam-section");
+
+        examSections.forEach(section => {
+            const markCells = section.querySelectorAll(".student-mark");
+            const percentageCells = section.querySelectorAll(".percentage-cell");
+            const gradeCells = section.querySelectorAll(".grade-cell");
+            const statusCells = section.querySelectorAll(".status-cell");
+
+            let total = 0;
+
+            markCells.forEach((cell, index) => {
+                const mark = parseFloat(cell.textContent);
+                total += mark;
+
+                // Assume subject is out of 100
+                const percentage = mark;
+                percentageCells[index].textContent = `${percentage.toFixed(2)}%`;
+
+                let grade = 'F', status = 'Fail', color = '#FF0019';
+
+                if (percentage >= 90) {
+                    grade = 'O'; status = 'Pass'; color = '#39fa05';
+                } else if (percentage >= 80) {
+                    grade = 'S'; status = 'Pass'; color = '#ccf807';
+                } else if (percentage >= 70) {
+                    grade = 'A'; status = 'Pass'; color = '#ecd213';
+                }else if (percentage >= 60) {
+                    grade = 'B'; status = 'Pass'; color = '#f4810b';
+                }else if (percentage >= 50) {
+                    grade = 'C'; status = 'Pass'; color = '#ed5712';
+                } else if (percentage >= 40) {
+                    grade = 'D'; status = 'Pass'; color = '#f0360f';
+                }
+
+                // Grade cell
+                const gradeCell = gradeCells[index];
+                gradeCell.textContent = grade;
+                gradeCell.style.color = color;
+                gradeCell.style.fontWeight = 'bold';
+
+                // Status cell
+                const statusCell = statusCells[index];
+                statusCell.textContent = status;
+                statusCell.style.color = (status === 'Pass') ? 'green' : 'red';
+                statusCell.style.fontWeight = 'bold';
+            });
+
+            const avg = markCells.length ? (total / markCells.length).toFixed(2) : 0;
+            section.querySelector(".total-marks").textContent = total.toFixed(2);
+            section.querySelector(".average-marks").textContent = avg;
+        });
+    });
+</script>
+{% endblock extra_js %}

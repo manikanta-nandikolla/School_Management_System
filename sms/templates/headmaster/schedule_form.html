@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Schedule Exam{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/exam_schedule.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>{% if edit_mode %}Edit{% else %}Add{% endif %} Exam Schedule</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit" name="action" value="save" class="btn1">Save</button>
+        <button type="submit" name="action" value="add_another" class="btn2">Save and Add Another</button>
+    </form>
+    <button class="btn"><a href="{% url 'headmaster_exam_schedules' %}">Exam list</a></button>
+
+    {% if temp_schedules %}
+    <hr>
+    <h3>Temporary Exam Schedules (Not Yet Saved)</h3>
+    <ul class="temp-list">
+        {% for item in temp_schedules %}
+        <li>
+            {{ item.exam }} - {{ item.subject }} - {{ item.class_section }} on {{ item.exam_date }} at {{ item.exam_time }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}

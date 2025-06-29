@@ -1,0 +1,106 @@
+/* Message styles */
+.message {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.message.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.message.error   { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.message.warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.message.info    { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+/* Dashboard Container */
+.container {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 800px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading Style */
+.container h2, .container h3 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Paragraphs */
+.container p {
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+/* Links as Button Cards */
+.container ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.container ul li a {
+  display: block;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f2651e, #47e716);
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.container ul li a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(255, 94, 98, 0.3);
+}
+
+/* Notification List */
+.container ul li {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.container ul li strong {
+  color: #333;
+}
+
+.container ul li span {
+  font-weight: bold;
+}
+
+.container ul li small {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .container ul li a {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+}

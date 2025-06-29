@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Register Headmaster{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accounts/headmaster_register.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="headmaster-register-wrapper">
+    <div class="container">
+        <h2>Headmaster Registration</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+            <p>Already have an account? <a href="{% url 'headmaster_login' %}">Login here</a></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

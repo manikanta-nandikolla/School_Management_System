@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fee Receipt</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 13px;
+            margin: 0;
+            color: #2C3E50;
+            position: relative;
+            padding: 15px 5vw;
+        }
+
+        .receipt-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 25px 30px;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 30%;
+            left: 25%;
+            transform: rotate(-30deg);
+            font-size: 60px;
+            color: #d0d0d0;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .paid-stamp {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 24px;
+            color: #27ae60;
+            font-weight: bold;
+            border: 2px solid #27ae60;
+            padding: 5px 12px;
+            border-radius: 5px;
+            background-color: #eafaf1;
+            transform: rotate(-10deg);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            width: 80px;
+            margin-bottom: 8px;
+            max-width: 20vw;
+        }
+
+        .receipt-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #ecf3fb;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .info-table td {
+            border: none;
+            padding: 5px;
+        }
+
+        .qr-code {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            max-width: 100px;
+            width: 25vw;
+            height: auto;
+        }
+
+        .tx-id {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .thank-you {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .signature {
+            margin-top: 25px;
+            text-align: right;
+        }
+
+        .signature img {
+            max-width: 100px;
+            width: 25vw;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 11px;
+            text-align: center;
+            color: #888;
+            border-top: 1px solid #ddd;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="receipt-container">
+
+    <div class="watermark">SREE VIDYALAYA EM HIGH SCHOOL</div>
+    <div class="paid-stamp">PAID</div>
+
+    <div class="header">
+        {% if logo_url %}
+            <img src="{{ logo_url|safe }}" class="logo" alt="School Logo">
+        {% endif %}
+        <div class="receipt-title">Fee Payment Receipt</div>
+    </div>
+
+    <table class="info-table">
+        <tr>
+            <td><strong>Student Name:</strong> {{ fee.student.get_full_name }}</td>
+            <td><strong>Roll No:</strong> {{ fee.student.roll_number }}</td>
+        </tr>
+        <tr>
+            <td><strong>Email:</strong> {{ fee.student.email }}</td>
+            <td><strong>Date:</strong> {{ fee.date }}</td>
+        </tr>
+        <tr>
+            <td><strong>Receipt No:</strong> #{{ fee.receipt_number }}</td>
+            <td><strong>Status:</strong> {{ fee.status|title }}</td>
+        </tr>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Amount (INR)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tuition / Academic Fee</td>
+                <td>₹{{ fee.amount }}</td>
+            </tr>
+            <tr>
+                <td><strong>Total Paid</strong></td>
+                <td><strong>₹{{ fee.amount }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if qr_code %}
+    <div class="qr-code">
+        <p><strong>Scan for Transaction</strong></p>
+        <img src="{{ qr_code|safe }}" alt="QR Code">
+    </div>
+    {% endif %}
+
+    {% if fee.razorpay_order_id %}
+    <div class="tx-id">Transaction ID: {{ fee.razorpay_order_id }}</div>
+    {% endif %}
+
+    <div class="thank-you">✅ Thank you for your payment!</div>
+
+    {% if signature_url %}
+    <div class="signature">
+        <p>Authorized Signature:</p>
+        <img src="{{ signature_url|safe }}" alt="Signature">
+    </div>
+    {% endif %}
+
+    <div class="footer">
+        This is a system-generated receipt. For queries, contact the administration.
+    </div>
+</div>
+</body>
+</html>

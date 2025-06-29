@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Leave Requests{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teachers/leave_requests.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+{% if messages %}
+    <div class="django-messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+<h2>Leave Approval</h2>
+
+{% if leave_requests %}
+    <table class="table">
+        <tr>
+            <th>Student</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for leave in leave_requests %}
+        <tr>
+            <td>{{ leave.student.get_full_name }}</td>
+            <td>{{ leave.reason }}</td>
+            <td>{{ leave.status }}</td>
+            <td>
+                {% if leave.status == 'Pending' %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="leave_id" value="{{ leave.id }}">
+                    <button name="action" value="approve">Approve</button>
+                    <button name="action" value="reject">Reject</button>
+                </form>
+                {% else %}
+                {{ leave.status }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p class="no-requests">No leave requests to review.</p>
+{% endif %}
+
+<a href="{% url 'teacher_dashboard' %}">Back to Dashboard</a>
+{% endblock %}

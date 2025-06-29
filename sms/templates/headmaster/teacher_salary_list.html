@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/teacher_salary_list.html' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">👨‍🏫 Teacher Salaries</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Teacher</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Pay Slip</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for salary in salaries %}
+            <tr>
+                <td>{{ salary.teacher.get_full_name }}</td>
+                <td>₹{{ salary.amount }}</td>
+                <td>{{ salary.date }}</td>
+                <td>
+                    {% if salary.payslip %}
+                        <a href="{{ salary.payslip.url }}" target="_blank" class="btn btn-outline-primary btn-sm">📄 View</a>
+                    {% else %}
+                        <span class="text-muted">Not uploaded</span>
+                    {% endif %}
+                </td>
+                <td>{{ salary.notes|default:"—" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

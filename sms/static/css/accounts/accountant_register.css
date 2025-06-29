@@ -1,0 +1,123 @@
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('/static/images/accountant_background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  perspective: 1200px;
+}
+.register-page-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Main Container */
+.container {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 45px 35px;
+  width: 420px;
+  color: #000000;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  margin: 20px auto;
+}
+
+.container:hover {
+  transform: rotateY(10deg) rotateX(5deg) scale(1.02);
+}
+
+/* Title */
+h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #000000;
+  text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Form Structure */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form p {
+  margin-bottom: 15px;
+}
+
+form label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #000000;
+  font-size: 15px;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+form input:focus,
+form select:focus {
+  background-color: rgba(255, 255, 255, 0.4);
+  outline: none;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #ff6f00, #ff9800);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(45deg, #ff9800, #ff6f00);
+}
+
+/* Login Link */
+form p:last-child {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+form p:last-child a {
+  color: #ffc107;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+form p:last-child a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 450px) {
+  .container {
+    width: 90%;
+    padding: 30px 20px;
+  }
+}

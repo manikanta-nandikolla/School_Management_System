@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accountant/dashboard.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <h2>Accountant Dashboard</h2>
+    <p>Welcome, {{ request.user.get_full_name }}!</p>
+    <p>Here you'll manage fees and teacher salaries.</p>
+    <ul>
+        <li><a href="{% url 'teacher_salary_list' %}">Manage Salaries</a></li>
+        <li><a href="{% url 'student_fee_list' %}">Student Fee List</a></li>
+        <li><a href="{% url 'student_fee_create' %}">Create Student Fees</a></li>
+    </ul>
+</div>
+<div class="container">
+    <h3>Recent Fee Payment Notifications</h3>
+    <ul>
+        {% for note in notifications %}
+        <li>
+            <strong>{{ note.student.get_full_name }}:</strong> ₹{{ note.amount }}
+            <span style="color: {% if note.status == 'success' %}green{% else %}red{% endif %};">
+                {{ note.status|title }}
+            </span>
+            <small>{{ note.created_at|naturaltime }}</small>
+        </li>
+        {% empty %}
+        <li>No recent payment activities.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

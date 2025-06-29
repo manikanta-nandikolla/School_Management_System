@@ -1,0 +1,112 @@
+/* Base styles */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: "Segoe UI", sans-serif;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.alert {
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.alert-success { background-color: #d4edda; color: #155724; }
+.alert-error, .alert-danger { background-color: #f8d7da; color: #721c24; }
+.alert-warning { background-color: #fff3cd; color: #856404; }
+.alert-info { background-color: #d1ecf1; color: #0c5460; }
+
+h2 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Labels and Inputs */
+label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #34495e;
+}
+
+.form-control {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Submit button */
+button[type="submit"] {
+    padding: 12px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #27ae60;
+}
+
+/* Link */
+a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #2980b9;
+    font-size: 14px;
+}
+a:hover{
+    text-decoration: underline;
+}
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .container {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    .form-control {
+        font-size: 15px;
+    }
+
+    button[type="submit"] {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    a {
+        font-size: 13px;
+    }
+}

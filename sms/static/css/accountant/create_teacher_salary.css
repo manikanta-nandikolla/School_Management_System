@@ -1,0 +1,98 @@
+/* Form Container */
+.container {
+  background: #ffffffcc;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  margin: 2rem auto;
+  width: 700px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+.container h2 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+/* Message styles */
+.message {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.message.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.message.error   { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.message.warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.message.info    { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+/* Form Elements */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Input styling using Bootstrap's .form-control */
+input.form-control,
+select.form-control,
+textarea.form-control {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+}
+
+input.form-control:focus,
+select.form-control:focus,
+textarea.form-control:focus {
+  outline: none;
+  border-color: #0072ff;
+  box-shadow: 0 0 0 3px rgba(0, 114, 255, 0.15);
+}
+
+/* Labels */
+form p {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Submit Button */
+button.btn {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 114, 255, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0, 114, 255, 0.3);
+}
+
+/* Responsive Tweaks */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  input.form-control,
+  select.form-control,
+  textarea.form-control {
+    font-size: 0.95rem;
+  }
+
+  button.btn {
+    width: 100%;
+  }
+}

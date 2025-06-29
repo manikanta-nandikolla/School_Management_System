@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teachers/dashboard.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+
+    <!-- Messages block -->
+    {% if messages %}
+        <div class="django-messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- End of messages block -->
+
+    <div class="dashboard-container">
+        <h2 class="welcome-message">Welcome, {{ request.user.get_full_name }}</h2>
+        <p class="dashboard-subtitle">This is your personalized teacher dashboard.</p>
+
+        <section class="quick-actions-section">
+            <h3 class="section-title"> Quick Actions</h3>
+            <nav class="dashboard-actions">
+                <a href="{% url 'record_attendance' %}" class="action-card2">Record Attendance</a>
+                <a href="{% url 'add_marks' %}" class="action-card3">Add Marks</a>
+                <a href="{% url 'leave_approval' %}" class="action-card4">Approve Leave Requests</a>
+                <a href="{% url 'teacher_salary_view' %}" class="action-card5">View Salary Slip</a>
+                <a href="{% url 'my_salary_records' %}" class="action-card6">View Salary Records</a>
+            </nav>
+        </section>
+
+        <section class="student-list-section">
+            <h3 class="section-title">👨‍🎓 Student List</h3>
+            {% if students %}
+                <ul class="student-list">
+                    {% for student in students %}
+                        <li class="student-item">
+                            <strong>{{ student.roll_number }}</strong> - {{ student.get_full_name }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-students">No students found.</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Teacher Login{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accounts/teacher_login.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="teacher-login-wrapper">
+  <div class="container">
+      <h2>Teacher Login</h2>
+      <form method="post">
+          {% csrf_token %}
+          <label for="username">Username:</label>
+          <input type="text" name="username" required>
+
+          <label for="password">Password:</label>
+          <input type="password" name="password" required>
+
+          <button type="submit">Login</button>
+          <a href="{% url 'password_reset' 'teacher' %}">Forgot Password?</a>
+          <p>Don't have an account? <a href="{% url 'teacher_register' %}">Register here</a></p>
+      </form>
+  </div>
+</div>
+{% endblock %}

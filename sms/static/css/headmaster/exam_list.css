@@ -1,0 +1,121 @@
+/* Container Styling */
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+/* Add Schedule Button */
+.container .btn {
+  background: linear-gradient(125deg, #09e0bc, #da84d0);
+  color: white;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.container .btn:hover {
+  background: linear-gradient(125deg, #067461, #9e5e97);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background-color: #fafafa;
+}
+
+table thead {
+  background-color: #ff4d00;
+  color: white;
+}
+
+table th, table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+table td:last-child {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Button Styles */
+.btn-sm {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.7rem;
+  margin-right: 0.3rem;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.btn-sm:hover {
+  opacity: 0.85;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c9302c;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table tr {
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.75rem;
+  }
+
+  table td {
+    padding: 0.5rem 0;
+    text-align: right;
+    position: relative;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 1rem;
+    font-weight: bold;
+    text-align: left;
+    color: #555;
+  }
+}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Teacher Salary View{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teachers/my_salary.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="salary-wrapper">
+  {% if messages %}
+    <div class="django-messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="salary-card">
+    <h2 class="salary-heading">💰 My Salary Records</h2>
+
+    <div class="table-responsive">
+      <table class="salary-table">
+        <thead>
+          <tr>
+            <th>Amount (₹)</th>
+            <th>Month</th>
+            <th>Date Paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for salary in salaries %}
+          <tr>
+            <td data-label="Amount (₹)">{{ salary.amount }}</td>
+            <td data-label="Month">{{ salary.month }}</td>
+            <td data-label="Date Paid">{{ salary.paid_date }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="3">No salary records found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

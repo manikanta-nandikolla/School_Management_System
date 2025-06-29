@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Manage Teacher Salaries{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/manage_salary.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>Add Teacher Salary</h2>
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Salary</button>
+    </form>
+
+    <h3>Salary Records</h3>
+    <table>
+        <thead>
+            <tr><th>Teacher</th><th>Month</th><th>Year</th><th>Amount</th><th>Paid Date</th></tr>
+        </thead>
+        <tbody>
+            {% for salary in salaries %}
+            <tr>
+                <td>{{ salary.teacher.get_full_name }}</td>
+                <td>{{ salary.month }}</td>
+                <td>{{ salary.year }}</td>
+                <td>₹{{ salary.amount }}</td>
+                <td>{{ salary.paid_date }}</td>
+                <td>
+                    <a href="{% url 'edit_teacher_salary' salary.id %}">✏️</a>
+                    <a href="{% url 'delete_teacher_salary' salary.id %}" onclick="return confirm('Are you sure?')">🗑️</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">No salary records.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'headmaster_dashboard' %}">⬅ Back</a>
+</div>
+{% endblock %}

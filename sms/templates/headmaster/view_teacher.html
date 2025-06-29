@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Teacher Profile{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/view_teacher.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+</div>
+<div class="container">
+    <h2>{{ teacher.get_full_name }}</h2>
+    <p><strong>Email:</strong> {{ teacher.email }}</p>
+    <p><strong>Username:</strong> {{ teacher.username }}</p>
+    <p><strong>Role:</strong> {{ teacher.role }}</p>
+    <p><strong>Assigned Class:</strong> 
+        {% if class_assignment %}
+            {{ class_assignment.class_section }}
+        {% else %}
+            Not assigned
+        {% endif %}
+    </p>
+    <p><strong>Assigned Subject(s):</strong>
+        {% if subject_assignments %}
+            <ul>
+            {% for assignment in subject_assignments %}
+                <li>{{ assignment.subject }} ({{ assignment.class_section }})</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            Not assigned
+        {% endif %}
+    </p>
+    <a href="{% url 'headmaster_dashboard' %}">⬅ Back</a>
+</div>
+{% endblock %}

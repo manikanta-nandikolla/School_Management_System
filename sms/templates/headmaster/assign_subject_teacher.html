@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Assign Subject Teacher{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/assign_subject_teacher.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>Assign Subject Teacher</h2>
+    <form method="post">
+        {% csrf_token %} 
+        {{ form.as_p }}
+        <button type="submit">Assign</button>
+    </form>
+
+    <h3>Current Assignments</h3>
+    <ul>
+        {% for assignment in assignments %}
+        <li>{{ assignment.class_section.class_name }} - {{ assignment.subject.name }} → {{ assignment.teacher.get_full_name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

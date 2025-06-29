@@ -1,0 +1,170 @@
+/* Message styles */
+.message {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.message.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.message.error   { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.message.warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.message.info    { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+/* Page Container */
+.container {
+  background: #ffffffcc;
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 1000px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Headings */
+.container h2, .container h3 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+.fee-container {
+  background: #ffffffcc;
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 1000px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  justify-content: center;
+  text-align: center;
+}
+
+/* Headings */
+.fee-container h2, .fee-container h3 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+table thead {
+  background: linear-gradient(135deg, #f77062, #fe5196);
+  color: white;
+}
+
+table th, table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Status Text */
+.text-success {
+  color: green;
+  font-weight: 600;
+}
+
+.text-muted {
+  color: #aaa;
+}
+
+/* Buttons */
+.btn1,
+.btn2,
+.btn3 {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn1 {
+  background-color: #007bff;
+  color: white;
+  margin-right: 0.3rem;
+}
+
+.btn2 {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn3 {
+  background-color: #ffc107;
+  color: black;
+  margin: 1rem auto;
+  display: block;
+  text-align: center;
+  width: max-content;
+}
+
+.btn1:hover {
+  background-color: #0056b3;
+}
+
+.btn2:hover {
+  background-color: #1e7e34;
+}
+
+.btn3:hover {
+  background-color: #e0a800;
+}
+
+/* List Styling */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+ul li {
+  background: #fff;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  font-size: 0.95rem;
+}
+
+/* Centered Message */
+.text-center {
+  text-align: center;
+  padding: 1rem;
+  font-style: italic;
+  color: #888;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  table th, table td {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+
+  .btn1, .btn2, .btn3 {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  ul li {
+    font-size: 0.9rem;
+  }
+}

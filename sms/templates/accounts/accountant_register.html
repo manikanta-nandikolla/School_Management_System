@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accounts/accountant_register.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="register-page-wrapper">
+    <div class="container">
+        <h2>Accountant Registration</h2>
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+        <p>Already have login? <a href="{% url 'accountant_login' %}">Login</a></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

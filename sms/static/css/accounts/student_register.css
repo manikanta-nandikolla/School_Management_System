@@ -1,0 +1,167 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('/static/images/student_background.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  perspective: 1200px;
+}
+.register-page-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Container */
+.register-container {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 45px 35px;
+  width: 420px;
+  color: #000000;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  margin: 20px auto;
+}
+
+.register-container:hover {
+  transform: rotateY(10deg) rotateX(5deg) scale(1.02);
+}
+
+/* Title */
+.register-container h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Django messages */
+.messages {
+  margin-bottom: 15px;
+}
+
+.messages .error,
+.messages .success,
+.messages .info {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.messages .error {
+  background-color: rgba(244, 67, 54, 0.8);
+  color: #fff;
+}
+
+.messages .success {
+  background-color: rgba(76, 175, 80, 0.8);
+  color: #fff;
+}
+
+.messages .info {
+  background-color: rgba(33, 150, 243, 0.8);
+  color: #fff;
+}
+
+/* Form fields */
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #000000;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  background-color: rgba(255, 255, 255, 0.4);
+  outline: none;
+  box-shadow: 0 0 8px #00bcd4;
+}
+
+/* Validation errors */
+.error {
+  color: #ffcdd2;
+  font-size: 13px;
+  margin-top: 5px;
+  text-shadow: 0 0 2px #000;
+}
+
+/* Submit button */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #00bcd4, #2196f3);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(45deg, #2196f3, #00bcd4);
+}
+
+/* Register link */
+form p {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+form p a {
+  color: #ffc107;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+form p a:hover {
+  text-decoration: underline;
+}
+select[name="class_section"] {
+  color: #000 !important;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+/* Responsive */
+@media (max-width: 450px) {
+  .register-container {
+    width: 90%;
+    padding: 30px 20px;
+  }
+}

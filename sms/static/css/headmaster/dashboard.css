@@ -1,0 +1,220 @@
+/* Dashboard Container */
+.container {
+    width: 90%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Headings */
+h2, h3 {
+    color: #ff4d00;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid #ff4d00;
+    padding-bottom: 0.5rem;
+}
+
+/* Add Buttons */
+.button-link {
+    display: inline-block;
+    background: #ff4d00;
+    color: #fff;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-bottom: 1rem;
+}
+
+.button-link:hover {
+    background: #e03e00;
+    transform: translateY(-2px);
+}
+
+/* User List */
+.user-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+}
+
+.user-list li {
+    background-color: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.user-list li:hover {
+    background-color: #f1f1f1;
+}
+
+.user-list li span {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Action Buttons */
+.btn-view,
+.btn-reject {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-view {
+    background-color: #2ecc71;
+}
+
+.btn-view:hover {
+    background-color: #27ae60;
+    transform: scale(1.05);
+}
+
+.btn-reject {
+    background-color: #e74c3c;
+}
+
+.btn-reject:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+/* Assign Teachers & Exam Schedules */
+ul li {
+    margin: 0.7rem 0;
+}
+
+ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+ul li a:hover {
+    color: #ff4d00;
+    border-color: #ff4d00;
+}
+
+/* Action Card Link */
+.action-card1 {
+    display: inline-block;
+    background: linear-gradient(120deg, #13d6af, #26aa5d);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-card1:hover {
+    background-color: #732d91;
+    transform: scale(1.05);
+}
+.action-card2 {
+    display: inline-block;
+    background: linear-gradient(120deg, #ccd613, #aa5d26);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-card2:hover {
+    background-color: #2d8791;
+    transform: scale(1.05);
+}
+.action-card3 {
+    display: inline-block;
+    background: linear-gradient(120deg, #d613b2, #aa2628);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-card3:hover {
+    background-color: #9014c5;
+    transform: scale(1.05);
+}
+/* Salary Button */
+button {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+button a {
+    display: inline-block;
+    background-color: #16a085;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button a:hover {
+    background-color: #117a65;
+    transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .user-list li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .user-list li span {
+        margin-top: 0.7rem;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .button-link,
+    .btn-view,
+    .btn-reject,
+    .action-card,
+    button a {
+        width: 100%;
+        text-align: center;
+    }
+    .container {
+        padding: 1.5rem;
+        width: 90%;
+    }
+
+}

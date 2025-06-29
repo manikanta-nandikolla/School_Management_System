@@ -1,0 +1,66 @@
+/* Container Styling */
+.container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+}
+
+/* Heading */
+.container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Profile Info */
+.container p {
+  margin: 0.8rem 0;
+  font-size: 1rem;
+  color: #444;
+}
+
+.container p strong {
+  color: #000;
+}
+
+/* Back Button */
+.container a {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background-color: #b46bbb;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.container a:hover {
+  background-color: #e600d7;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.2rem;
+  }
+
+  .container h2 {
+    font-size: 1.5rem;
+  }
+
+  .container p {
+    font-size: 0.95rem;
+  }
+
+  .container a {
+    width: 100%;
+    text-align: center;
+  }
+}

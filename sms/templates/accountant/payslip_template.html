@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Payslip</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 13px;
+      margin: 0;
+      padding: 5vw;
+      color: #2C3E50;
+    }
+
+    .container {
+      border: 1px solid #ccc;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .paid-stamp {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #27ae60;
+      border: 2px solid #27ae60;
+      padding: 5px 15px;
+      font-size: 18px;
+      font-weight: bold;
+      background: #eafaf1;
+      transform: rotate(-5deg);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      margin: 0;
+      color: #3498db;
+    }
+
+    .details {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .details div {
+      width: 48%;
+      margin-bottom: 8px;
+    }
+
+    table.salary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .salary-table th, .salary-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    .salary-table th {
+      background-color: #f0f8ff;
+      font-weight: bold;
+    }
+
+    .note {
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 11px;
+      text-align: center;
+      color: #888;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+
+    .qr-signature {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .qr-code, .signature {
+      width: 45%;
+      text-align: center;
+    }
+
+    .qr-code img, .signature img {
+      border: 1px solid #ccc;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="paid-stamp">PAID</div>
+
+  <div class="header">
+    <h2>Salary Payslip</h2>
+    <div><strong>{{ salary.month }} {{ salary.year }}</strong></div>
+  </div>
+
+  <div class="details">
+    <div><span class="label">Teacher:</span> {{ salary.teacher.get_full_name }}</div>
+    <div><span class="label">Payment Date:</span> {{ salary.paid_date|date:"F d, Y" }}</div>
+    <div><span class="label">Method:</span> {{ salary.payment_method|title }}</div>
+    <div><span class="label">Payslip No:</span> #{{ salary.id }}</div>
+  </div>
+
+  <table class="salary-table">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Amount (₹)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Basic</td><td>₹{{ salary.basic }}</td></tr>
+      <tr><td>HRA</td><td>₹{{ salary.hra }}</td></tr>
+      <tr><td>Bonus</td><td>₹{{ salary.bonus }}</td></tr>
+      <tr><td>Deductions</td><td>-₹{{ salary.deductions }}</td></tr>
+      <tr><td><strong>Total Paid</strong></td><td><strong>₹{{ salary.amount }}</strong></td></tr>
+    </tbody>
+  </table>
+
+  {% if salary.note %}
+  <div class="note">
+    <strong>Note:</strong> {{ salary.note }}
+  </div>
+  {% endif %}
+
+  <div class="qr-signature">
+    {% if qr_code %}
+    <div class="section qr">
+        <strong>Verification QR:</strong><br>
+        <img src="{{ qr_code }}" width="100" height="100">
+    </div>
+    {% endif %}
+
+    {% if signature_url %}
+    <div class="signature">
+      <strong>Authorized Signature</strong><br>
+      <img src="{{ signature_url|safe }}">
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="footer">
+    This is a system-generated payslip. Please contact the administration for any queries.
+  </div>
+</div>
+</body>
+</html>

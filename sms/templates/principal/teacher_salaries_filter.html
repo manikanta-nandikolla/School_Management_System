@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Salary Filter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f6f9;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-3px);
+    }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 500;
+            margin-right: 5px;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 100px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        table {
+             width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            table-layout: fixed; /* Important for wrapping */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
+        th {
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #e6f2ff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                 margin: 20px;
+                padding: 20px;
+            }
+
+            form {
+                flex-direction: column;
+                align-items: stretch;
+        }
+
+            input[type="number"], button {
+                width: 100%;
+            }
+
+        t   able, thead, tbody, th, td, tr {
+                display: block;
+         }
+
+            thead {
+             display: none;
+            }   
+
+            tbody tr {
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 10px;
+                background: #fff;
+            }
+
+            td {
+                padding: 10px 10px 10px 110px;
+                text-align: left;
+                position: relative;
+                white-space: normal;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                font-weight: bold;
+                text-align: left;
+                width: 90px;
+                white-space: nowrap;
+                color: #555;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h2>Teacher Salaries - Filter</h2>
+
+        <form method="get">
+            <div>
+                <label>Month:</label>
+                <input type="number" name="month" value="{{ month_selected }}" min="1" max="12">
+            </div>
+            <div>
+                <label>Year:</label>
+                <input type="number" name="year" value="{{ year_selected }}" min="2020">
+            </div>
+            <div>
+                <button type="submit">Filter</button>
+            </div>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Teacher</th>
+                    <th>Email</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for salary in salaries %}
+                <tr>
+                    <td data-label="Teacher">{{ salary.teacher.get_full_name }}</td>
+                    <td data-label="Email">{{ salary.teacher.email }}</td>
+                    <td data-label="Amount">₹{{ salary.amount }}</td>
+                    <td data-label="Date">{{ salary.paid_date|date:"Y-m-d" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">No results found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

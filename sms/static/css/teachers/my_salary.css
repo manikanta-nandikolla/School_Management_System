@@ -1,0 +1,138 @@
+/* my_salary.css */
+
+.salary-wrapper {
+  width: 1000px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+}
+
+.salary-heading {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Message Alerts */
+.django-messages {
+  margin-bottom: 1.5rem;
+}
+
+.alert {
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  border-left: 5px solid;
+}
+
+.alert-success {
+  background-color: #e9f7ef;
+  color: #2e7d32;
+  border-color: #2e7d32;
+}
+
+.alert-error,
+.alert-danger {
+  background-color: #fdecea;
+  color: #c62828;
+  border-color: #c62828;
+}
+
+.alert-warning {
+  background-color: #fff8e1;
+  color: #f9a825;
+  border-color: #f9a825;
+}
+
+.alert-info {
+  background-color: #e3f2fd;
+  color: #0277bd;
+  border-color: #0277bd;
+}
+
+/* Table Styling */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.salary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.salary-table thead {
+  background-color: #34495e;
+  color: white;
+}
+
+.salary-table th,
+.salary-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.salary-table tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+.salary-table td[data-label]::before {
+  content: attr(data-label);
+  font-weight: bold;
+  color: #555;
+  display: none;
+}
+
+/* Empty state */
+.salary-table tr td[colspan] {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .salary-table,
+  .salary-table thead,
+  .salary-table tbody,
+  .salary-table th,
+  .salary-table td,
+  .salary-table tr {
+    display: block;
+  }
+
+  .salary-table thead {
+    display: none;
+  }
+
+  .salary-table tr {
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .salary-table td {
+    position: relative;
+    padding-left: 50%;
+    border-bottom: 1px solid #eee;
+  }
+
+  .salary-table td[data-label]::before {
+    display: block;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

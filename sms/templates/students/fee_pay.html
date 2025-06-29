@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Student Pending Fee{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/students/fee_pay.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container">
+  <h2 class="center-heading">Pay Your Fee</h2>
+
+  {% if message %}
+    <p class="info-message">{{ message }}</p>
+  {% elif fee and fee.id %}
+    <p class="amount-text">Amount to be paid: <strong>₹{{ fee.amount }}</strong></p>
+    <button id="pay-button" class="pay-button">Pay Now</button>
+  {% else %}
+    <p class="info-message">Fee details not available.</p>
+  {% endif %}
+</div>
+
+{% if fee and fee.id %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  const options = {
+    key: "{{ razorpay_key }}",
+    amount: "{{ fee.amount|floatformat:0 }}00",
+    currency: "INR",
+    order_id: "{{ order_id }}",
+    handler: function (response) {
+      console.log("Payment ID:", response.razorpay_payment_id);
+      // Redirect to success page after slight delay
+      setTimeout(function () {
+        window.location.href = "{% url 'payment_success' fee.id %}";
+      }, 2000);
+    },
+    prefill: {
+      name: "{{ request.user.get_full_name }}",
+      email: "{{ request.user.email }}"
+    },
+    theme: {
+      color: "#528FF0"
+    }
+  };
+
+  const rzp1 = new Razorpay(options);
+
+  document.getElementById('pay-button')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    rzp1.open();
+  });
+</script>
+{% endif %}
+{% endblock %}

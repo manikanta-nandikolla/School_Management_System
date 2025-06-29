@@ -1,0 +1,99 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #6fb2f4, #59e78f);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s ease-in-out;
+    padding: 20px;
+}
+
+.logout-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.logout-card {
+    background: #db9999;
+    padding: 40px 60px;
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    animation: slideIn 0.6s ease-out;
+}
+
+.logout-card h1 {
+    font-size: 2rem;
+    color: #2b2d42;
+    margin-bottom: 16px;
+}
+
+.logout-card p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 24px;
+}
+
+.home-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.home-button:hover {
+    background-color: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .logout-card {
+        padding: 30px 20px;
+    }
+
+    .logout-card h1 {
+        font-size: 1.6rem;
+    }
+
+    .logout-card p {
+        font-size: 1rem;
+    }
+
+    .home-button {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+}

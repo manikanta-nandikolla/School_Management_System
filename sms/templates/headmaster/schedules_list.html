@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Exam list{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/exam_list.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>Exam Schedules</h2>
+    <a href="{% url 'headmaster_exam_add' %}" class="btn">➕ Add Schedule</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Exam</th>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Class</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in schedules %}
+            <tr>
+                <td>{{ s.exam }}</td>
+                <td>{{ s.subject }}</td>
+                <td>{{ s.exam_date }}</td>
+                <td>{{ s.exam_time|time:"h:i A" }}</td>
+                <td>{{ s.class_section }}</td>
+                <td style="text-align:center;">
+                    <a href="{% url 'headmaster_exam_edit' s.pk %}" class="btn btn-sm">✏️ Edit</a>
+                    <a href="{% url 'headmaster_exam_delete' s.pk %}" class="btn btn-sm btn-danger">🗑️ Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

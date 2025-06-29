@@ -1,0 +1,324 @@
+/* ========== Global Styles ========== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #333;
+}
+.alert {
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.alert-success { background-color: #d4edda; color: #155724; }
+.alert-error, .alert-danger { background-color: #f8d7da; color: #721c24; }
+.alert-warning { background-color: #fff3cd; color: #856404; }
+.alert-info { background-color: #d1ecf1; color: #0c5460; }
+
+/* Layout Wrappers */
+.dashboard-wrapper {
+    padding: 30px 20px;
+}
+
+.dashboard-container {
+    max-width: 960px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.dashboard-container:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+.welcome-message {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.dashboard-subtitle {
+    font-size: 18px;
+    color: #6c757d;
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 22px;
+    margin-top: 40px;
+    color: #34495e;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* Action Buttons */
+.dashboard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.dashboard-link {
+    display: inline-block;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dashboard-link:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Student List */
+.student-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 15px;
+}
+
+.student-item {
+    background-color: #f8f9fa;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.student-item:hover {
+    background-color: #e9ecef;
+}
+
+.no-students {
+    font-style: italic;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* Salary Table Container */
+.salary-container {
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    max-width: 968px;
+}
+
+/* Salary Table */
+.salary-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.salary-table thead {
+    background-color: #f1f3f5;
+}
+
+.salary-table th,
+.salary-table td {
+    padding: 14px;
+    border: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.salary-table th {
+    color: #495057;
+    font-weight: 600;
+}
+
+.salary-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Download Button */
+.btn.btn-primary {
+    background-color: #28a745;
+    padding: 8px 14px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn.btn-primary:hover {
+    background-color: #218838;
+    transform: scale(1.03);
+}
+/* ========== Action Cards ========== */
+.dashboard-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin: 20px 0 30px;
+    padding: 0;
+}
+
+.action-card1 {
+    display: block;
+    background: linear-gradient(135deg, #f802e4, #0199ff);
+    color: white;
+    text-align: center;
+    padding: 16px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-card1:hover {
+    background: linear-gradient(135deg, #a629b9, #248ea3);
+    transform: translateY(-3px);
+}
+.action-card2 {
+    display: block;
+    background: linear-gradient(135deg, #50db34, #29aab9);
+    color: white;
+    text-align: center;
+    padding: 16px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-card2:hover {
+    background: linear-gradient(135deg, #7db929, #24a32f);
+    transform: translateY(-3px);
+}
+.action-card3 {
+    display: block;
+    background: linear-gradient(135deg, #db5334, #b99329);
+    color: white;
+    text-align: center;
+    padding: 16px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-card3:hover {
+    background: linear-gradient(135deg, #b92929, #a38124);
+    transform: translateY(-3px);
+}
+.action-card4 {
+    display: block;
+    background: linear-gradient(135deg, #9334db, #b929b2);
+    color: white;
+    text-align: center;
+    padding: 16px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-card4:hover {
+    background: linear-gradient(135deg, #b92954, #5b24a3);
+    transform: translateY(-3px);
+}
+.action-card5 {
+    display: block;
+    background: linear-gradient(135deg, #ff0000, #0e02f7);
+    color: white;
+    text-align: center;
+    padding: 16px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-card5:hover {
+    background: linear-gradient(135deg, #b92929, #3324a3);
+    transform: translateY(-3px);
+}
+.action-card6 {
+    display: block;
+    background: linear-gradient(135deg, #f8ec02, #01eaff);
+    color: white;
+    text-align: center;
+    padding: 16px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-card6:hover {
+    background: linear-gradient(135deg, #a6b929, #24a3a1);
+    transform: translateY(-3px);
+}
+/* ========== Responsive Design ========== */
+
+@media (max-width: 768px) {
+    .dashboard-container,
+    .salary-container {
+        padding: 20px;
+    }
+
+    .dashboard-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dashboard-link {
+        width: 100%;
+        text-align: center;
+    }
+
+    .salary-table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-message {
+        font-size: 22px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .dashboard-link {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+
+    .btn.btn-primary {
+        font-size: 13px;
+        padding: 7px 12px;
+    }
+}

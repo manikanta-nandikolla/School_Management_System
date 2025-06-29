@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Manage Notices{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/principal/notice_list.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>📢 All Notices</h2>
+    <a href="{% url 'notice_create' %}" class="btn btn-success mb-3">➕ Add Notice</a>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for notice in notices %}
+            <tr>
+                <td>{{ notice.title }}</td>
+                <td>{{ notice.date }}</td>
+                <td>{{ notice.content|truncatechars:100 }}</td>
+                <td>
+                    <a href="{% url 'notice_edit' notice.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{% url 'notice_delete' notice.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this notice?')">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No notices found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

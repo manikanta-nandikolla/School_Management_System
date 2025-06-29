@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Student Fee History
+{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/students/fee_history.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h3>💰 Fee Payment History</h3>
+    <div class="table-responsive-custom">
+        <table class="fee-table">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date Paid</th>
+                    <th>Receipt</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fee in fee_records %}
+                    <tr>
+                        <td data-label="Amount">₹{{ fee.amount }}</td>
+                        <td data-label="Status">
+                            {% if fee.status == 'paid' %}
+                                <span class="badge-paid">Paid</span>
+                            {% else %}
+                                <span class="badge-unpaid">Unpaid</span>
+                            {% endif %}
+                        </td>
+                        <td data-label="Date Paid">{{ fee.date|date:"d-m-Y" }} </td>
+                        <td data-label="Receipt">
+                            {% if fee.receipt_pdf %}
+                                <a href="{{ fee.receipt_pdf.url }}" target="_blank" class="btn-download">Download</a>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="no-records">No fee records available.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fee Payment Success{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/students/payment_success.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container payment-success-container">
+    <h2 class="success-heading">✅ Payment Successful!</h2>
+
+    {% if fee %}
+        <div class="payment-card">
+            <p><strong>Name:</strong> {{ fee.student.get_full_name }}</p>
+            <p><strong>Amount Paid:</strong> ₹{{ fee.amount }}</p>
+            <p><strong>Date:</strong> {{ fee.date|date:"jS M Y" }}</p>
+            <p><strong>Status:</strong> {{ fee.status|title }}</p>
+
+            <a href="{% url 'download_fee_receipt' fee.id %}" class="btn-download">
+                ⬇️ Download Receipt (PDF)
+            </a>
+        </div>
+    {% else %}
+        <div class="alert-info">
+            No pending fee found or fee already paid.
+        </div>
+    {% endif %}
+
+    <a href="{% url 'student_dashboard' %}" class="btn-back">⬅ Back to Dashboard</a>
+</div>
+{% endblock %}

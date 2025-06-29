@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Student Profile{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/view_student.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>{{ student.get_full_name }}</h2>
+    <p><strong>Email:</strong> {{ student.email }}</p>
+    <p><strong>Roll Number:</strong> {{ student.roll_number }}</p>
+    <p><strong>Class:</strong> {{ student.class_section }}</p>
+
+    <a href="{% url 'headmaster_dashboard' %}">⬅ Back</a>
+</div>
+{% endblock %}

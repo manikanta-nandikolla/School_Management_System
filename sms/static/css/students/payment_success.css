@@ -1,0 +1,83 @@
+/* Container spacing from navbar */
+.payment-success-container {
+    margin-top: 80px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Heading style */
+.success-heading {
+    color: #28a745;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* Card for payment details */
+.payment-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 25px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+/* Info text inside card */
+.payment-card p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* Receipt download button */
+.btn-download {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-download:hover {
+    background-color: #0056b3;
+}
+
+/* Alert */
+.alert-info {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #e9f7ff;
+    border-left: 5px solid #17a2b8;
+    display: inline-block;
+}
+
+/* Back button */
+.btn-back {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 18px;
+    background-color: #6c757d;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background-color: #5a6268;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .payment-card {
+        padding: 20px;
+        font-size: 14px;
+    }
+
+    .success-heading {
+        font-size: 22px;
+    }
+}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Record Attendance{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teachers/record_attendance.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+{% if messages %}
+    <div class="django-messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+<div class="container">
+    <h2>Record Student Attendance</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Attendance</button>
+    </form>
+    <a href="{% url 'teacher_dashboard' %}">Back to Dashboard</a>
+</div>
+{% endblock %}

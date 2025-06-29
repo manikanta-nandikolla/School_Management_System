@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Headmaster Dashboard{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/dashboard.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container">
+    <h2>Headmaster Dashboard</h2>
+
+    <!-- Teachers Section -->
+    <div class="dashboard-section">
+        <h3>Teachers</h3>
+        <ul class="user-list">
+            {% for teacher in teachers %}
+            <li>
+                {{ teacher.get_full_name }}
+                <span>
+                    <a href="{% url 'view_teacher_profile' teacher.id %}" class="btn-view" title="View Teacher Profile">
+                        <i class="fas fa-eye"></i> View
+                    </a>
+                    <form action="{% url 'delete_teacher' teacher.id %}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete {{ teacher.get_full_name }}?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-reject" title="Delete Teacher">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                    </form>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+        <h3>Students</h3>
+        <ul class="user-list">
+            {% for student in students %}
+            <li>
+                {{ student.get_full_name }}
+                <span>
+                    <a href="{% url 'view_student_profile' student.id %}" class="btn-view" title="View Student Profile">
+                        <i class="fas fa-eye"></i> View
+                    </a>
+                    <form action="{% url 'delete_student' student.id %}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete {{ student.get_full_name }}?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-reject" title="Delete Student">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                    </form>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <h3>Assign Teachers</h3>
+    <ul>
+        <li><a href="{% url 'assign_class_teacher' %}" class="action-card1">Assign Class Teacher</a></li>
+        <li><a href="{% url 'assign_subject_teacher' %}" class="action-card2">Assign Subject Teacher</a></li>
+    </ul>
+</div>
+<div class="container">
+    <h3>Exam Schedules</h3>
+    <ul>
+        <li><a href="{% url 'headmaster_exam_add' %}" class="action-card3">Add Exam Schedule</a><br></li>
+    </ul>
+</div>
+<div class="container">
+    <h3>View Your Salary Payslips</h3>
+    <button><a href="{% url 'headmaster_salary_view' %}">Click here</a></button>
+</div>
+{% block extra_js %}
+<script>
+    function handleFormSubmission(selector, confirmMessage, successMessage) {
+        document.querySelectorAll(selector).forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (confirmMessage && !confirm(confirmMessage)) return;
+
+                const userId = this.dataset.userid;
+                const url = this.action;
+                const csrftoken = this.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                        'Accept': 'application/json',
+                    },
+                    credentials: 'same-origin',
+                })
+                .then(response => {
+                    if (response.ok) {
+                        const row = document.getElementById(`pending-user-${userId}`);
+                     if (row) row.remove();
+                        alert(successMessage);
+                    } else {
+                        alert('Operation failed.');
+                    }
+                })
+                .catch(() => alert('An error occurred.'));
+            });
+        });
+    }
+</script>
+{% endblock extra_js %}
+{% endblock %}

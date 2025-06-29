@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Assign Class Teacher{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/assign_class_teacher.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+<h2>Assign Class Teacher</h2>
+    <form method="post">
+        {% csrf_token %} 
+        {{ form.as_p }}
+        <button type="submit">Assign</button>
+    </form>
+
+    <h3>Current Assignments</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Teacher</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignments %}
+            <tr>
+                <td>{{ assignment.class_section.class_name }}</td>
+                <td>{{ assignment.teacher.get_full_name }}</td>
+                <td>
+                    <a href="{% url 'edit_class_teacher' assignment.pk %}" class="action-card1">Edit</a> |
+                    <a href="{% url 'delete_class_teacher' assignment.pk %}" class="action-card2">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h3>Filter Class Teacher Assignments</h3>
+    <form method="get">
+        <input type="text" name="teacher" placeholder="Teacher name" value="{{ request.GET.teacher }}">
+        <select name="class">
+            <option value="">All Classes</option>
+            {% for cls in class_sections %}
+                <option value="{{ cls.id }}" {% if request.GET.class == cls.id|stringformat:"s" %}selected{% endif %}>Class {{ cls.class_name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Teacher</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignments %}
+            <tr>
+                <td>{{ assignment.class_section.class_name }}</td>
+                <td>{{ assignment.teacher.get_full_name }}</td>
+                <td>
+                    <a href="{% url 'edit_class_teacher' assignment.pk %}">Edit</a> |
+                    <a href="{% url 'delete_class_teacher' assignment.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

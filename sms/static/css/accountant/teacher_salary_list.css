@@ -1,0 +1,141 @@
+/* Container */
+.container {
+  background: #ffffffcc;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+.container h2 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+/* Message styles */
+.message {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.message.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.message.error   { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.message.warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.message.info    { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+/* Add Salary Button */
+.add-salary-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 114, 255, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-salary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 114, 255, 0.25);
+}
+
+/* Table Styles */
+.salary-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+}
+
+.salary-table thead {
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
+  color: white;
+}
+
+.salary-table th, .salary-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.salary-table tr:hover {
+  background-color: #b16a18;
+  transition: background-color 0.3s ease;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.btn-outline-primary {
+  color: #007bff;
+  border: 1px solid #007bff;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+  margin: 10px auto;
+}
+
+.btn-outline-primary:hover {
+  background: #007bff;
+  color: white;
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+  border: none;
+  transition: background 0.2s ease-in-out;
+}
+
+.btn-success:hover {
+  background: #218838;
+}
+
+/* No Records Row */
+.no-records {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+  padding: 1rem;
+  background-color: #fdfdfd;
+}
+
+/* Muted Text */
+.text-muted {
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .salary-table th, .salary-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .add-salary-button,
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+}

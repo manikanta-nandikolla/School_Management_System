@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Pending Fee{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/students/pending_fees.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container pending-fee-container">
+    <h2 class="text-center">📄 My Pending Fee Records</h2>
+
+    <div class="table-responsive-custom">
+        <table class="pending-fee-table">
+            <thead>
+                <tr>
+                    <th>Amount (₹)</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fee in pending_fees %}
+                    <tr>
+                        <td data-label="Amount (₹)">{{ fee.amount }}</td>
+                        <td data-label="Status">{{ fee.status }}</td>
+                        <td data-label="Date">{{ fee.date }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3" class="no-records">No pending fees.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

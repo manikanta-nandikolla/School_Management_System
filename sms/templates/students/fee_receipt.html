@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fee Receipt{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/students/fee_receipt.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container">
+  <h2>📄 My Fee Receipts</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Receipt</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for fee in paid_fees %}
+        <tr>
+          <td>₹{{ fee.amount }}</td>
+          <td>{{ fee.status }}</td>
+          <td>{{ fee.date }}</td>
+          <td>
+            <a href="{% url 'download_fee_receipt' fee.id %}" target="_blank">⬇️ Download PDF</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No paid fees found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

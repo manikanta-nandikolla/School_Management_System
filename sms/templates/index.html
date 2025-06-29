@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sree Vidyalaya{% endblock title %}
+
+{% block extra_css %}
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/your_kit_id.js" crossorigin="anonymous"></script> <!-- replace with your FontAwesome kit -->
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="alert-bar">
+    Admissions Open for {% now "Y" %} – Enroll Now!
+</div>
+<div class="messages">
+    {% for message in messages %}
+        <div class="{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+</div>
+<!-- Hero -->
+<div class="hero-container">
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <img src="{% static 'images/logo.jpeg' %}" class="school-logo" alt="Logo" loading="lazy">
+        <h1>Welcome to <span>Sree Vidyalaya</span></h1>
+        <p>Empowering Education through Innovation</p>
+    </div>
+</div>
+
+<!-- Leaders -->
+<div class="leaders-section" data-aos="fade-up">
+    <div class="leader-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcsS5df3JGHRjt7uuYhlHTD-LC0NXoNQteWQ&s" alt="Founder" loading="lazy">
+        <h4>Founder</h4>
+        <p># Founder Name</p>
+    </div>
+    <div class="leader-card">
+        <img src="https://i.pinimg.com/736x/0b/a1/51/0ba151d85fc708f26a9f80a7d9c1750e.jpg" alt="Principal" loading="lazy">
+        <h4>Principal</h4>
+        <p># Principal Name</p>
+    </div>
+</div>
+
+<!-- Role Selection -->
+<div class="roles-section" data-aos="fade-up">
+    <h2>Select Your Role</h2>
+    <div class="role-cards">
+        <a href="{% url 'student_login' %}" class="role-card1"><i class="fas fa-user-graduate"></i> Student</a>
+        <a href="{% url 'teacher_login' %}" class="role-card2"><i class="fas fa-chalkboard-teacher"></i> Teacher</a>
+        <a href="{% url 'headmaster_login' %}" class="role-card3"><i class="fas fa-user-tie"></i> Headmaster</a>
+        <a href="{% url 'accountant_login' %}" class="role-card4"><i class="fas fa-calculator"></i> Accountant</a>
+        <a href="{% url 'principal_login' %}" class="role-card5"><i class="fas fa-user-shield"></i> Principal</a>
+    </div>
+</div>
+
+<!-- Info -->
+<div class="dashboard-grid" data-aos="fade-up">
+    <div class="dashboard-section">
+        <h3>📢 Latest Notices</h3>
+        <ul>
+            {% for notice in notices %}
+                <li><strong>{{ notice.title }}</strong> – {{ notice.date }}</li>
+            {% empty %}
+                <li>No notices available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="dashboard-section">
+        <h3>🎉 Upcoming Events</h3>
+        <ul>
+            {% for event in events %}
+                <li><strong>{{ event.title }}</strong> – {{ event.event_date }}</li>
+            {% empty %}
+                <li>No events scheduled.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="dashboard-section">
+        <h3>🏖️ Holidays</h3>
+        <div class="holiday-cards">
+            {% for holiday in holidays %}
+            <div class="holiday-card">
+                <div class="holiday-date">{{ holiday.date|date:"M d" }}</div>
+                <div class="holiday-name">{{ holiday.name }}</div>
+            </div>
+            {% empty %}
+            <p>No holidays found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Calendar -->
+<div class="calendar-section" data-aos="fade-up">
+    <h3>📅 School Calendar</h3>
+    <div id="calendar"></div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    document.addEventListener('DOMContentLoaded', function () {
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 'auto',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,listMonth'
+            },
+            events: [
+                {% for event in events %}
+                {
+                    title: "{{ event.title }}",
+                    start: "{{ event.event_date|date:'Y-m-d' }}",
+                    color: "#28a745"
+                },
+                {% endfor %}
+                {% for holiday in holidays %}
+                {
+                    title: "{{ holiday.name }} (Holiday)",
+                    start: "{{ holiday.date|date:'Y-m-d' }}",
+                    color: "#dc3545"
+                },
+                {% endfor %}
+            ]
+        });
+        calendar.render();
+    });
+</script>
+{% endblock %}

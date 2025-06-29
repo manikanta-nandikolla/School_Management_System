@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Exam delete confirmation{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/headmaster/delete_schedule.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container delete-confirmation">
+    <h2>Delete Exam Schedule</h2>
+    <p>Are you sure you want to delete <strong>{{ schedule.subject }}</strong>
+       ({{ schedule.exam }} – {{ schedule.exam_date }})?</p>
+    <form method="post" style="margin-top:1rem;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a href="{% url 'headmaster_exam_schedules' %}" class="btn btn-cancel">Cancel</a>
+    </form>
+</div>
+{% endblock %}

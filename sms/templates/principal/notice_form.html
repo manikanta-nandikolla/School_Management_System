@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add / Edit Notice{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/principal/notice_form.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <h2>{% if form.instance.pk %}✏️ Edit Notice{% else %}➕ Add Notice{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'notice_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

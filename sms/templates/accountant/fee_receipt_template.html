@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: sans-serif; font-size: 14px; }
+        h2 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>School Fee Receipt</h2>
+    <p><strong>Student:</strong> {{ fee.student.get_full_name }}</p>
+    <p><strong>Email:</strong> {{ fee.student.email }}</p>
+    <p><strong>Amount:</strong> ₹{{ fee.amount }}</p>
+    <p><strong>Status:</strong> {{ fee.status|title }}</p>
+    <p><strong>Date:</strong> {{ fee.date }}</p>
+    <p>Thank you for your payment!</p>
+</body>
+</html>

@@ -1,0 +1,114 @@
+/* Container adjustments */
+.container {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: auto;
+}
+.container h3{
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 1600;
+}
+/* Table base style */
+.fee-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+.fee-table thead {
+    background-color: #f0f0f0;
+}
+
+.fee-table th, .fee-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* Badge styles */
+.badge-paid {
+    background-color: #4caf50;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.badge-unpaid {
+    background-color: #f44336;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Download button */
+.btn-download {
+    background-color: #2196f3;
+    color: white;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.btn-download:hover {
+    background-color: #1976d2;
+}
+
+/* No data row */
+.no-records {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Responsive table handling */
+@media (max-width: 768px) {
+    .fee-table, .fee-table thead, .fee-table tbody, .fee-table th, .fee-table td, .fee-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .fee-table thead {
+        display: none;
+    }
+
+    .fee-table tr {
+        margin-bottom: 1rem;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .fee-table td {
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .fee-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 0.75rem;
+        font-weight: bold;
+        color: #444;
+        text-align: left;
+    }
+
+    .btn-download {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+}

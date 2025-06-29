@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Student Marks{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teachers/add_marks.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+{% if messages %}
+    <div class="django-messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+    
+<div class="container">
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+<div class="container">
+    <h2>Add Student Marks</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_student">Student:</label>
+            {{ form.student }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_subject">Subject:</label>
+            {{ form.subject }}
+        </div>
+
+        <div class="form-group" id="custom-subject-div" style="display: none;">
+            <label for="id_custom_subject">Enter Subject Name:</label>
+            {{ form.custom_subject }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_marks_obtained">Marks Obtained:</label>
+            {{ form.marks_obtained }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_exam">Exam:</label>
+            {{ form.exam }}
+        </div>
+
+        <button type="submit" name="save" value="single" class="btn">Save</button>
+        <button type="submit" name="save" value="another" class="btn">Save and Add Another Subject</button>
+    </form>
+
+    <div class="back-link">
+        <a href="{% url 'teacher_dashboard' %}">← Back to Dashboard</a>
+    </div>
+
+
+    {% if last_marks %}
+        <div class="submitted-marks">
+            <h4>Submitted Marks</h4>
+            <ul>
+                {% for mark in last_marks %}
+                    <li>{{ mark }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const subjectField = document.getElementById("id_subject");
+    const customSubject = document.getElementById("id_custom_subject");
+
+    function toggleCustomSubject() {
+        if (subjectField.options[subjectField.selectedIndex].text === "Others") {
+            customSubject.style.display = "block";
+        } else {
+            customSubject.style.display = "none";
+            customSubject.value = "";
+        }
+    }
+
+    subjectField.addEventListener("change", toggleCustomSubject);
+    toggleCustomSubject(); // initial call
+});
+</script>
+{% endblock extra_js %}

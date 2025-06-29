@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Processing Payment{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Processing Your Payment...</h2>
+  <p>We are verifying your payment of ₹{{ fee.amount }}.</p>
+  <p>This usually takes 5–10 seconds. If the page doesn’t update automatically, please refresh.</p>
+</div>
+
+<!-- Auto-refresh every 5 seconds -->
+<script>
+  setTimeout(function () {
+    location.reload();
+  }, 5000);
+</script>
+{% endblock %}

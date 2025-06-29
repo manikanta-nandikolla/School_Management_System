@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Teacher Salary Create{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accountant/create_teacher_salary.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <h2>Pay Teacher Salary</h2>
+  <form method="post" enctype="multipart/form-data" action="{% url 'pay_teacher_salary' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Pay Salary</button>
+  </form>
+</div>
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const basic = document.getElementById("id_basic");
+        const hra = document.getElementById("id_hra");
+        const bonus = document.getElementById("id_bonus");
+        const deductions = document.getElementById("id_deductions");
+        const amount = document.getElementById("id_amount");
+
+        function calculateTotal() {
+            const b = parseFloat(basic.value) || 0;
+            const h = parseFloat(hra.value) || 0;
+            const bo = parseFloat(bonus.value) || 0;
+            const d = parseFloat(deductions.value) || 0;
+            const total = b + h + bo - d;
+            amount.value = total.toFixed(2);
+        }
+
+        [basic, hra, bonus, deductions].forEach(input => {
+            input.addEventListener("input", calculateTotal);
+        });
+    });
+</script>
+{% endblock extra_js %}
+
+{% endblock %}

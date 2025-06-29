@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Student Fee List{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accountant/student_fee_list.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <h2>Student Fees</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Student</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Action</th>
+        <th>Receipt</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for fee in fees %}
+      <tr>
+        <td>{{ fee.student.get_full_name }}</td>
+        <td>₹{{ fee.amount }}</td>
+        <td>{{ fee.status|title }}</td>
+        <td>{{ fee.date }}</td>
+        <td>
+          {% if fee.status != 'paid' %}
+          <a href="{% url 'receive_student_fee' fee.id %}" class="btn3">💵 Mark Paid</a>
+          {% else %}
+          <span class="text-success">Paid</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if fee.receipt_pdf %}
+          <a href="{% url 'view_fee_receipt' fee.id %}" target="_blank" class="btn1">View Receipt</a>
+          <a href="{% url 'view_fee_receipt' fee.id %}" download class="btn2">⬇ Download</a>
+          {% else %}
+          <span class="text-muted">No Receipt</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6" class="text-center">No fee records.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<a href="{% url 'export_fees_excel' %}" class="btn3">⬇ Export Excel</a>
+<div class="fee-container">
+  <h3>Paid Fees</h3>
+  <ul>
+    {% for fee in paid_fees %}
+    <li>{{ fee.student.get_full_name }} - ₹{{ fee.amount }} - {{ fee.date }}</li>
+    {% empty %}
+    <li>No paid fees.</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Unpaid Fees</h3>
+  <ul>
+    {% for fee in unpaid_fees %}
+    <li>{{ fee.student.get_full_name }} - ₹{{ fee.amount }} - {{ fee.date }}</li>
+    {% empty %}
+    <li>No unpaid fees.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

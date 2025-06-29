@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <style>
+        /* Reset some basic defaults */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td:nth-child(4) {
+            font-weight: bold;
+        }
+
+        /* Add simple responsive behavior */
+        @media screen and (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                background: #fff;
+                padding: 10px;
+                border-radius: 6px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            }
+
+            td {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border: none;
+                border-bottom: 1px solid #eee;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #555;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>All User Accounts - PDF Export</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td data-label="Full Name">{{ user.get_full_name }}</td>
+                <td data-label="Email">{{ user.email }}</td>
+                <td data-label="Role">{{ user.get_role_display }}</td>
+                <td data-label="Status">
+                    {% if user.is_approved %}
+                        Approved
+                    {% elif not user.is_active %}
+                        Rejected
+                    {% else %}
+                        Pending
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

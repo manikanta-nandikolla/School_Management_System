@@ -1,0 +1,85 @@
+/* Base styles for container */
+.delete-confirmation {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    font-family: Arial, sans-serif;
+}
+
+/* Heading */
+.delete-confirmation h2 {
+    color: #c0392b;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Paragraph */
+.delete-confirmation p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Button container (to stack on mobile) */
+.delete-confirmation form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 18px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-cancel {
+    background-color: #bdc3c7;
+    color: #2c3e50;
+}
+
+.btn-cancel:hover {
+    background-color: #95a5a6;
+}
+
+/* Responsive behavior for smaller screens */
+@media (max-width: 600px) {
+    .delete-confirmation {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    .delete-confirmation h2 {
+        font-size: 20px;
+    }
+
+    .delete-confirmation p {
+        font-size: 14px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

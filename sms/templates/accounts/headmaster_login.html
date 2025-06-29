@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Headmaster Login{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accounts/headmaster_login.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="headmaster-login-wrapper">
+    <div class="container">
+        <h2>Headmaster Login</h2>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <label>Username:</label>
+            <input type="text" name="username" required>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            <button type="submit">Login</button>
+            <a href="{% url 'password_reset' 'headmaster' %}">Forgot Password?</a>
+            <p>Don't have an account? <a href="{% url 'headmaster_register' %}">Register here</a></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

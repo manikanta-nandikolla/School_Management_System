@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Teacher Salary Form{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accountant/teacher_salary_form.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <h2>{% if form.instance.pk %}✏️ Edit{% else %}➕ Add{% endif %} Teacher Salary</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Save</button>
+    <a href="{% url 'teacher_salary_list' %}" class="btn1">Cancel</a>
+  </form>
+</div>
+{% endblock %}

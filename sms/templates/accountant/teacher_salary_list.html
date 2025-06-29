@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Salaries List{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accountant/teacher_salary_list.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <h2>Teacher Salary Records</h2>
+  <a href="{% url 'teacher_salary_create' %}" class="add-salary-button">➕ Add Salary</a>
+  
+  <table class="salary-table">
+    <thead>
+      <tr>
+        <th>Teacher</th>
+        <th>Amount (₹)</th>
+        <th>Month</th>
+        <th>Date Paid</th>
+        <th>Pay slip</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for salary in salaries %}
+      <tr>
+        <td>{{ salary.teacher.get_full_name }}</td>
+        <td>{{ salary.amount }}</td>
+        <td>{{ salary.month }}</td>
+        <td>{{ salary.paid_date }}</td>
+        <td>
+          {% if salary.payslip %}
+            <a href="{{ salary.payslip.url }}" target="_blank" class="btn btn-outline-primary btn-sm">📄 View</a><br>
+            <a href="{% url 'download_teacher_payslip' salary.pk %}" class="btn btn-sm btn-success" target="_blank">⬇ Download</a>
+          {% else %}
+            <span class="text-muted">Not uploaded</span>
+          {% endif %}
+        </td>
+
+        <td>{{ salary.note|default:"—" }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5" class="no-records">No records found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'export_teacher_salaries_excel' %}" class="btn btn-success">⬇ Export Excel</a>
+</div>
+{% endblock %}

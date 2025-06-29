@@ -1,0 +1,349 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f6f9;
+}
+
+.alert-bar {
+    background: #dc3545;
+    color: white;
+    text-align: center;
+    padding: 0.6rem;
+    font-weight: bold;
+}
+/* Django messages */
+.messages {
+  margin-bottom: 15px;
+}
+
+.messages .error,
+.messages .success,
+.messages .info {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.messages .error {
+  background-color: rgba(244, 67, 54, 0.8);
+  color: #fff;
+}
+
+.messages .success {
+  background-color: rgba(76, 175, 80, 0.8);
+  color: #fff;
+}
+
+.messages .info {
+  background-color: rgba(33, 150, 243, 0.8);
+  color: #fff;
+}
+/* HERO */
+.hero-container {
+    position: relative;
+    height: 90vh;
+    background: url('../images/school-bg.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0, 80, 160, 0.6));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 700px;
+}
+
+.school-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+/* LEADERS */
+.leaders-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.leader-card {
+    background: white;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 200px;
+}
+
+.leader-card img {
+    width: 100%;
+    border-radius: 12px;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* ROLES */
+.roles-section {
+    text-align: center;
+    margin: 3rem auto;
+}
+
+.role-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.role-card1 {
+    background:linear-gradient(90deg, #ec4937, #ffffff );
+    color: black;
+    padding: 1.2rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.role-card1 i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.role-card1:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+.role-card2 {
+    background:linear-gradient(90deg, #bcec37, #ffffff );
+    color: black;
+    padding: 1.2rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.role-card2 i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.role-card2:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+.role-card3 {
+    background:linear-gradient(90deg, #37ecc2, #ffffff );
+    color: black;
+    padding: 1.2rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.role-card3 i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.role-card3:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+.role-card4 {
+    background:linear-gradient(90deg, #37c2ec, #ffffff );
+    color: black;
+    padding: 1.2rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.role-card4 i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.role-card4:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+.role-card5 {
+    background:linear-gradient(90deg, #ad37ec, #ffffff );
+    color: black;
+    padding: 1.2rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.role-card5 i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.role-card5:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+/* DASHBOARD */
+.dashboard-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2rem;
+}
+
+.dashboard-section {
+    background: white;
+    padding: 1.5rem;
+    margin: 1rem;
+    flex: 1;
+    min-width: 280px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* HOLIDAYS */
+.holiday-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.holiday-card {
+    background: #f0f0f0;
+    padding: 1rem;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+}
+
+.holiday-date {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* CALENDAR */
+.calendar-section {
+    background: white;
+    margin: 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+
+  .hero-container {
+    height: 70vh;
+    padding: 1rem;
+    background-position: center;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .school-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .leaders-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .leader-card {
+    width: 90%;
+    margin-bottom: 1rem;
+  }
+
+  .role-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .role-card {
+    width: 90%;
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+
+  .dashboard-grid {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .dashboard-section {
+    width: 100%;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .holiday-cards {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .holiday-card {
+    width: 100%;
+  }
+
+  .calendar-section {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .footer {
+    font-size: 0.9rem;
+    padding: 1rem 0.5rem;
+  }
+
+  .alert-bar {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}

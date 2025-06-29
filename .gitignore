@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.env
+*.DS_Store
+*.sqlite3
+*.log
+*.pot
+*.pyc
+
+# Virtual environment
+venv/
+env/
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+/media/
+staticfiles/
+static_root/
+*.json
+
+# IDE/editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System
+Thumbs.db
+.DS_Store
+
+# PyCharm
+*.iml
+*.ipr
+*.iws
+
+# WeasyPrint generated PDFs
+*.pdf
+receipts/
+payslips/
+
+# Environments
+.env
+.env.*
