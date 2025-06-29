@@ -14,6 +14,7 @@ dj-database-url==3.0.0
 Django==5.0
 django-crispy-forms==2.4
 django-jazzmin==3.0.1
+django-pwa==2.0.1
 django-widget-tweaks==1.5.0
 et_xmlfile==2.0.0
 fonttools==4.58.2

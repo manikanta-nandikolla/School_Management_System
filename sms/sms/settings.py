@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     
     'django.contrib.humanize',
+    
+    'pwa',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -167,6 +169,29 @@ ACCOUNTANT_EMAIL = os.getenv('ACCOUNTANT_EMAIL')
 RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID')
 RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET')
 RAZORPAY_WEBHOOK_SECRET = os.getenv('RAZORPAY_WEBHOOK_SECRET')
+
+# PWA integration
+PWA_APP_NAME = 'Sree Vidyalaya'
+PWA_APP_DESCRIPTION = "School Management System"
+PWA_APP_THEME_COLOR = '#0d6efd'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_START_URL = '/'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/images/logo.jpeg',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': '/static/images/logo.jpeg',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'
 
 # Jazzmin design
 JAZZMIN_SETTINGS = {

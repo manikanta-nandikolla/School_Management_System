@@ -29,6 +29,6 @@ urlpatterns = [
     path('headmaster/', include('headmaster.urls')),
     path('principal/', include('principal.urls')),
     path('accountant/', include('accountant.urls')),
-    
     path('razorpay/webhook/', razorpay_webhook, name='razorpay_webhook'),
+    path('', include('pwa.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
