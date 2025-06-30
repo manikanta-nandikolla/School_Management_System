@@ -46,7 +46,6 @@ body {
 .hero-container {
     position: relative;
     height: 90vh;
-    background: url('../images/school-bg.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
